@@ -1,4 +1,5 @@
 const bodyParser = require("body-parser");
+const { RSA_NO_PADDING } = require("constants");
 const { name } = require("ejs");
 const { response } = require("express");
 const express = require("express");
@@ -20,13 +21,10 @@ app.get("/",(req,res)=>{
             console.log("connection successful");
     });
     const sql = `SELECT * FROM info`;
-    db.all(sql, [], (err,rows)=>{
+    db.all(sql, (err,rows)=>{
         if(err) return console.error(err.message);
-        rows.forEach((row) =>{
-            console.log(row);
-        });
+        return res.render("",{layout:"./layouts/main",text:rows});
     });
-    return res.render("",{layout:"./layouts/main"});
 });
 app.get('/create',(req,res) =>{
     return res.render("create",{layout: "./layouts/main"});
