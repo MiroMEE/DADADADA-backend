@@ -1,0 +1,23 @@
+body{
+    background-color: rgba(238, 211, 171,0.5);
+}
+.text{
+    background-color: blanchedalmond;
+    height: 40px;
+    width: 900px;
+    border:solid black 0.1px;
+}
+.text:hover{
+    background-color: rgba(255, 235, 205,0.1);
+}
+.divForm{
+    height: 100px;
+    background-color: rgb(165, 110, 29);
+    position: fixed;
+    left: 200px;
+    bottom: 10px;
+}
+.divStaticForm{
+    height: 100px;
+    width: auto;
+}

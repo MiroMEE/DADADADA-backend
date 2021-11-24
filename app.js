@@ -18,17 +18,12 @@ app.get("/",(req,res)=>{
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database("./info.db", sqlite3.OPEN_READWRITE, (err) => {
         if(err) return console.error(err.message);
-            console.log("connection successful");
     });
     const sql = `SELECT * FROM users`;
     db.all(sql, (err,dataInput,name)=>{
         if(err) return console.error(err.message);
-        console.log(dataInput,name);
         return res.render("",{layout:"./layouts/main",text:dataInput,__name:name});
     });
-});
-app.get('/create',(req,res) =>{
-    return res.render("create",{layout: "./layouts/main"});
 });
 app.post('/submit',(req,res) =>{
     const sqlite3 = require('sqlite3').verbose();
