@@ -21,9 +21,10 @@ app.get("/",(req,res)=>{
             console.log("connection successful");
     });
     const sql = `SELECT * FROM users`;
-    db.all(sql, (err,rows,name)=>{
+    db.all(sql, (err,dataInput,name)=>{
         if(err) return console.error(err.message);
-        return res.render("",{layout:"./layouts/main",text:rows,__name:name});
+        console.log(dataInput,name);
+        return res.render("",{layout:"./layouts/main",text:dataInput,__name:name});
     });
 });
 app.get('/create',(req,res) =>{
@@ -35,8 +36,8 @@ app.post('/submit',(req,res) =>{
         if(err) return console.error(err.message);
     });
     
-    const sql = `INSERT INTO users(dataInput)
-    VALUES('${req.body.dataInput}')`;
+    const sql = `INSERT INTO users(dataInput,name)
+    VALUES('${req.body.dataInput}','${req.body.name}')`;
     db.run(sql),(err) =>{
     if(err) return console.error(err.message);
         console.log("A new row has been created");
