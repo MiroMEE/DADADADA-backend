@@ -20,10 +20,10 @@ app.get("/",(req,res)=>{
         if(err) return console.error(err.message);
             console.log("connection successful");
     });
-    const sql = `SELECT * FROM info`;
-    db.all(sql, (err,rows)=>{
+    const sql = `SELECT * FROM users`;
+    db.all(sql, (err,rows,name)=>{
         if(err) return console.error(err.message);
-        return res.render("",{layout:"./layouts/main",text:rows});
+        return res.render("",{layout:"./layouts/main",text:rows,__name:name});
     });
 });
 app.get('/create',(req,res) =>{
@@ -33,11 +33,10 @@ app.post('/submit',(req,res) =>{
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database("./info.db", sqlite3.OPEN_READWRITE, (err) => {
         if(err) return console.error(err.message);
-            console.log("connection successful");
     });
-    const first = req.body.dataInput;
-    const sql = `INSERT INTO info(first)
-    VALUES('${first}')`;
+    
+    const sql = `INSERT INTO users(dataInput)
+    VALUES('${req.body.dataInput}')`;
     db.run(sql),(err) =>{
     if(err) return console.error(err.message);
         console.log("A new row has been created");
