@@ -1,0 +1,56 @@
+#main{background-color: black;
+    margin: -8px;
+}
+#playerOne{background-color: wheat;
+    position: relative;
+    float: left;
+}
+#playerTwo{background-color: wheat;
+    position: relative;
+    float: right;
+}
+#centerChanger{background-color: gray;
+    position: relative;
+    float: left;
+    opacity: 0.9;
+}
+#playerLeft{
+    position: relative;
+    float: left;
+    background-color: yellow;
+}
+#playerRight{
+    position: relative;
+    float: right;
+    background-color: hotpink;
+}
+#BLOK{
+    position: absolute;
+    background-color: red;
+}
+.AYAYA{
+    position: absolute;
+    background-color: white;
+    width: 64px;
+    height: 64px;
+}
+#score{
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    position: fixed;
+    background-color: blueviolet;
+    width: 120px;
+    height: 40px;
+    text-align: left;
+}
+#score2{
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    margin-left: 120px;
+    position: fixed;
+    background-color: rgb(226, 43, 43);
+    width: 120px;
+    height: 40px;
+}
