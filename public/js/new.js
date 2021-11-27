@@ -7,7 +7,7 @@ let centerChanger = document.getElementById("centerChanger");
 let BLOK = document.getElementById("BLOK");
 const scoreBoard = document.getElementById("score");
 const scoreBoard2 = document.getElementById("score2");
-let widthOne,heightOne,width,height,BLOK_HEIGHT,BLOK_WIDTH,BLOK_TOP;
+let widthOne,heightOne,width,height,BLOK_HEIGHT,BLOK_WIDTH,BLOK_TOP,speed_fluency,random_timer,x=0,y=0,dx,dy,distance;
 //set up
 width = 1920;
 height = 900;
@@ -15,26 +15,27 @@ setUpLeftPlayer_L = "d";
 setUpLeftPlayer_R = "f";
 setUpRightPlayer_L = "j";
 setUpRightPlayer_R = "k";
-
-// NENÍ HOTOVO - NENÍ S AUTOMATIZOVANÉ
-const L_L= -768;
-const L_R= -64;
-const R_L= 384;
-const R_R= 1088;
-BLOK_WIDTH = 64;
-BLOK_HEIGHT = 64;
-BLOK_TOP = 600;
-
+BLOK_TOP = 700;
+speed_fluency = 10;
+random_timer = 500;
 //process
+const L_L= -(width/2.5);
+const L_R= -(width/30);
+const R_L= width/5;
+const R_R= width-((width/2.5)+(width/30));
+
+BLOK_WIDTH = width/30;
+BLOK_HEIGHT = width/30;
 widthOne = width/2.5;
-heightOne = height/8;
+heightOne = width/30;
+
 playerLeft.style.left = L_L+"px";
 playerRight.style.right = R_L+"px";
 playerRight.style.left = R_L+"px";
+
 regionLeft.style.width = widthOne+"px";
 regionLeft.style.height = heightOne+"px";
 regionLeft.style.bottom = -(height-heightOne)+"px";
-
 regionRight.style.width = widthOne+"px";
 regionRight.style.height = heightOne+"px";
 regionRight.style.bottom = -(height-heightOne)+"px";
@@ -42,7 +43,7 @@ regionRight.style.bottom = -(height-heightOne)+"px";
 main.style.width = width+"px";
 main.style.height = height+"px";
 
-centerChanger.style.height = (height)+"px";
+centerChanger.style.height = height+"px";
 centerChanger.style.width = "20%";
 
 BLOK.style.width = BLOK_WIDTH+"PX";
@@ -50,11 +51,10 @@ BLOK.style.height = BLOK_HEIGHT+"PX";
 BLOK.style.top = BLOK_TOP+"px";
 BLOK.style.left = "0px"
 //process player
-playerLeft.style.width = (width/8)+"px";
-playerLeft.style.height = (height/8)+"px";
-
-playerRight.style.width = (width/8)+"px";
-playerRight.style.height = (height/8)+"px";
+playerLeft.style.width = BLOK_HEIGHT+"px";
+playerLeft.style.height = BLOK_HEIGHT+"px";
+playerRight.style.width = BLOK_HEIGHT+"px";
+playerRight.style.height = BLOK_HEIGHT+"px";
 
 document.addEventListener("keypress",(event)=>{
     switch(true) {
@@ -63,7 +63,7 @@ document.addEventListener("keypress",(event)=>{
             BLOK.style.left = L_L+"px";
             break;
         case event.key==setUpLeftPlayer_R||event.key==setUpLeftPlayer_R.toUpperCase():
-            playerLeft.style.left = ((-(width/8)))+"px";
+            playerLeft.style.left = L_R+"px";
             BLOK.style.left = L_R+"px";
             break;
         case event.key==setUpRightPlayer_L||event.key==setUpRightPlayer_L.toUpperCase():
@@ -71,7 +71,7 @@ document.addEventListener("keypress",(event)=>{
             BLOK.style.left = R_L+"px";
             break;
         case event.key==setUpRightPlayer_R||event.key==setUpRightPlayer_R.toUpperCase():
-            playerRight.style.left = (R_R-L_R+(-(width/8)))+"px";
+            playerRight.style.left = R_R+"px";
             BLOK.style.left = R_R+"px";
             break;
         default:
@@ -87,12 +87,13 @@ document.addEventListener("keypress",(event)=>{
 setInterval(() => {
     const random = (Math.floor(Math.random() * 4) + 1);
     create(random); 
-}, 500);
-let x=0;let y=0;
-let dx;let dy;let distance;
+}, random_timer);
 function create(RANDOM){
+    let c=0;
     const DO = document.getElementById("centerChanger");
     const neww = document.createElement("div");
+    neww.style.width = (width/30)+"px";
+    neww.style.height = (width/30)+"px";
     neww.style.top = "-1000px";
     switch (true) {
         case RANDOM==1:
@@ -110,13 +111,13 @@ function create(RANDOM){
         default:
             break;
     }
-    neww.setAttribute("class","AYAYA")
+    neww.setAttribute("class","AYAYA");
     DO.append(neww);
     let D = "No";
     const fic = setInterval(() => {
         let volesY = neww.style.getPropertyValue("top").split("px")[0];
         neww.style.top = Number(volesY-(-10))+"px";
-        if(volesY>580&&volesY<690){
+        if(volesY>BLOK_TOP-20&&volesY<BLOK_TOP+90){
             volesY = neww.style.getPropertyValue("top").split("px")[0];
             let lesvX = neww.style.getPropertyValue("left").split("px")[0];
             let rn_position_Y = BLOK_TOP;
@@ -125,17 +126,27 @@ function create(RANDOM){
             dy=volesY-rn_position_Y;
             distance = Math.sqrt(dx**2+dy**2);
             if(distance<10&&distance>-10){
-                x=x+10;
                 neww.remove();
+                const vadd = setInterval(() => {
+                    x=x+10;
+                    scoreBoard.innerText = x;
+                    c=c+1
+                    if(c==10){
+                        clearInterval(vadd);
+                    };
+                }, 10);
                 D="Yes";
-                scoreBoard.innerText = x;
+                clearInterval(fic);
             };
             if(D=="No"){
                 y=y+1;
-                neww.remove();
-                clearInterval(fic);
                 scoreBoard2.innerText = y;
+                const vad = setTimeout(() => {
+                    neww.remove();
+                    clearTimeout(vad);
+                    clearInterval(fic);
+                }, 130);
             };
         };
-    }, 10);
+    }, speed_fluency);
 };
