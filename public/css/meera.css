@@ -4,25 +4,32 @@
 #playerOne{background-color: wheat;
     position: relative;
     float: left;
+    z-index: 0;
 }
 #playerTwo{background-color: wheat;
     position: relative;
     float: right;
+    z-index: 0;
 }
 #centerChanger{background-color: gray;
     position: relative;
     float: left;
     opacity: 0.9;
+    z-index: 1;
 }
 #playerLeft{
-    position: relative;
+    margin-top: 205%;
     float: left;
+    position: absolute;
     background-color: yellow;
+    z-index: 1;
 }
 #playerRight{
-    position: relative;
+    margin-top: 205%;
+    position: absolute;
     float: right;
     background-color: hotpink;
+    z-index: 1;
 }
 #BLOK{
     position: absolute;
@@ -53,4 +60,7 @@
     background-color: rgb(226, 43, 43);
     width: 120px;
     height: 40px;
+}
+body{
+    background-color: black;
 }

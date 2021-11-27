@@ -5,20 +5,32 @@ let playerLeft = document.getElementById("playerLeft");
 let playerRight = document.getElementById("playerRight");
 let centerChanger = document.getElementById("centerChanger");
 let BLOK = document.getElementById("BLOK");
-let widthOne,heightOne,width,height,leftt,topp,BLOK_HEIGHT,BLOK_WIDTH;
+const scoreBoard = document.getElementById("score");
+const scoreBoard2 = document.getElementById("score2");
+let widthOne,heightOne,width,height,BLOK_HEIGHT,BLOK_WIDTH,BLOK_TOP;
 //set up
 width = 1920;
 height = 900;
-widthOne = width/2.5;
-heightOne = height/8;
-setUpLeftPlayer_L = "a";
-setUpLeftPlayer_R = "d";
-setUpRightPlayer_L = "k";
-setUpRightPlayer_R = "ů";
+setUpLeftPlayer_L = "d";
+setUpLeftPlayer_R = "f";
+setUpRightPlayer_L = "j";
+setUpRightPlayer_R = "k";
 
+// NENÍ HOTOVO - NENÍ S AUTOMATIZOVANÉ
+const L_L= -768;
+const L_R= -64;
+const R_L= 384;
+const R_R= 1088;
 BLOK_WIDTH = 64;
 BLOK_HEIGHT = 64;
+BLOK_TOP = 600;
+
 //process
+widthOne = width/2.5;
+heightOne = height/8;
+playerLeft.style.left = L_L+"px";
+playerRight.style.right = R_L+"px";
+playerRight.style.left = R_L+"px";
 regionLeft.style.width = widthOne+"px";
 regionLeft.style.height = heightOne+"px";
 regionLeft.style.bottom = -(height-heightOne)+"px";
@@ -35,41 +47,34 @@ centerChanger.style.width = "20%";
 
 BLOK.style.width = BLOK_WIDTH+"PX";
 BLOK.style.height = BLOK_HEIGHT+"PX";
-BLOK.style.top = "600px";
+BLOK.style.top = BLOK_TOP+"px";
 BLOK.style.left = "0px"
 //process player
 playerLeft.style.width = (width/8)+"px";
-playerLeft.style.height = "100%";
+playerLeft.style.height = (height/8)+"px";
 
 playerRight.style.width = (width/8)+"px";
-playerRight.style.height = "100%";
-let works="Ano";
-let dis_X;
+playerRight.style.height = (height/8)+"px";
+
 document.addEventListener("keypress",(event)=>{
     switch(true) {
         case event.key==setUpLeftPlayer_L||event.key==setUpLeftPlayer_L.toUpperCase(): 
-            playerLeft.style.float = "left";
-            BLOK.style.left = (-768)+"px";
-            dis_X = -780;
+            playerLeft.style.left = L_L+"px";
+            BLOK.style.left = L_L+"px";
             break;
         case event.key==setUpLeftPlayer_R||event.key==setUpLeftPlayer_R.toUpperCase():
-            playerLeft.style.float = "right";
-            BLOK.style.left = (-64)+"px";
-            dis_X = -64;
-        break;
+            playerLeft.style.left = ((-(width/8)))+"px";
+            BLOK.style.left = L_R+"px";
             break;
         case event.key==setUpRightPlayer_L||event.key==setUpRightPlayer_L.toUpperCase():
-            playerRight.style.float = "left";
-            BLOK.style.left = (384)+"px";
-            dis_X = 384;
+            playerRight.style.left = R_L+"px";
+            BLOK.style.left = R_L+"px";
             break;
         case event.key==setUpRightPlayer_R||event.key==setUpRightPlayer_R.toUpperCase():
-            playerRight.style.float = "right";
-            BLOK.style.left = (1088)+"px";
-            dis_X = 1088;
+            playerRight.style.left = (R_R-L_R+(-(width/8)))+"px";
+            BLOK.style.left = R_R+"px";
             break;
         default:
-            console.log("<"+event.key+">")
             break;
    };
    if(BLOK.style.left.split("px")[0]>0){
@@ -83,26 +88,24 @@ setInterval(() => {
     const random = (Math.floor(Math.random() * 4) + 1);
     create(random); 
 }, 500);
-const scoreBoard = document.getElementById("score");
-const scoreBoard2 = document.getElementById("score2");
 let x=0;let y=0;
+let dx;let dy;let distance;
 function create(RANDOM){
-    let dx;let dy;let distance;
     const DO = document.getElementById("centerChanger");
     const neww = document.createElement("div");
     neww.style.top = "-1000px";
     switch (true) {
         case RANDOM==1:
-            neww.style.left = "-768px";
+            neww.style.left = L_L+"px";
             break;
         case RANDOM==2:
-            neww.style.left = "-64px";
+            neww.style.left = L_R+"px";
             break;
         case RANDOM==3:
-            neww.style.left = "384px";
+            neww.style.left = R_L+"px";
             break;
         case RANDOM==4:
-            neww.style.left = "1088px";
+            neww.style.left = R_R+"px";
             break;
         default:
             break;
@@ -116,12 +119,11 @@ function create(RANDOM){
         if(volesY>580&&volesY<690){
             volesY = neww.style.getPropertyValue("top").split("px")[0];
             let lesvX = neww.style.getPropertyValue("left").split("px")[0];
-            let rn_position_Y = 600;
+            let rn_position_Y = BLOK_TOP;
             let rn_position_X = (BLOK.style.getPropertyValue("left").split("px")[0]);
             dx=rn_position_X-lesvX;
             dy=volesY-rn_position_Y;
             distance = Math.sqrt(dx**2+dy**2);
-            console.log(distance);
             if(distance<10&&distance>-10){
                 x=x+10;
                 neww.remove();
