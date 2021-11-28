@@ -8,21 +8,24 @@ let BLOK = document.getElementById("BLOK");
 const scoreBoard = document.getElementById("score");
 const scoreBoard2 = document.getElementById("score2");
 let widthOne,heightOne,width,height,BLOK_HEIGHT,BLOK_WIDTH,BLOK_TOP,speed_fluency,random_timer,x=0,y=0,dx,dy,distance;
+let setUpLeftPlayer_L,setUpLeftPlayer_R,setUpRightPlayer_L,setUpRightPlayer_R,setupCHANGER_;
+let CHANGE_NOW="LEFT";
 //set up
-width = 1920;
+width = 1900;
 height = 900;
 setUpLeftPlayer_L = "d";
 setUpLeftPlayer_R = "f";
 setUpRightPlayer_L = "j";
 setUpRightPlayer_R = "k";
+setupCHANGER_ = " ";
 BLOK_TOP = 700;
 speed_fluency = 10;
 random_timer = 500;
 //process
 const L_L= -(width/2.5);
 const L_R= -(width/30);
-const R_L= width/5;
-const R_R= width-((width/2.5)+(width/30));
+const R_L= (width/5);
+const R_R= (width-((width/2.5)+(width/30)));
 
 BLOK_WIDTH = width/30;
 BLOK_HEIGHT = width/30;
@@ -56,23 +59,52 @@ playerLeft.style.height = BLOK_HEIGHT+"px";
 playerRight.style.width = BLOK_HEIGHT+"px";
 playerRight.style.height = BLOK_HEIGHT+"px";
 
+const ready = document.getElementById("ready");
+ready.addEventListener("click",()=>{
+    ready.remove();
+
+    setInterval(() => {
+        const random = (Math.floor(Math.random() * 4) + 1);
+        create(random); 
+    }, random_timer);
+
+});
 document.addEventListener("keypress",(event)=>{
     switch(true) {
         case event.key==setUpLeftPlayer_L||event.key==setUpLeftPlayer_L.toUpperCase(): 
             playerLeft.style.left = L_L+"px";
-            BLOK.style.left = L_L+"px";
+            if(CHANGE_NOW=="LEFT"){
+                BLOK.style.left = L_L+"px";
+            };
             break;
         case event.key==setUpLeftPlayer_R||event.key==setUpLeftPlayer_R.toUpperCase():
             playerLeft.style.left = L_R+"px";
-            BLOK.style.left = L_R+"px";
+            if(CHANGE_NOW=="LEFT"){
+                BLOK.style.left = L_R+"px";
+            };
             break;
         case event.key==setUpRightPlayer_L||event.key==setUpRightPlayer_L.toUpperCase():
             playerRight.style.left = R_L+"px";
-            BLOK.style.left = R_L+"px";
+            if(CHANGE_NOW=="RIGHT"){
+                BLOK.style.left = R_L+"px";
+            };
             break;
         case event.key==setUpRightPlayer_R||event.key==setUpRightPlayer_R.toUpperCase():
             playerRight.style.left = R_R+"px";
-            BLOK.style.left = R_R+"px";
+            if(CHANGE_NOW=="RIGHT"){
+                BLOK.style.left = R_R+"px";
+            };
+            break;
+        case event.key==setupCHANGER_:
+            if(CHANGE_NOW=="LEFT"){
+                CHANGE_NOW = "RIGHT";
+                let gloked = playerRight.style.left.split("px")[0];
+                BLOK.style.left = gloked+"px";
+            } else if(CHANGE_NOW=="RIGHT"){
+                CHANGE_NOW = "LEFT";
+                let gloked = playerLeft.style.left.split("px")[0];
+                BLOK.style.left = gloked+"px";
+            };
             break;
         default:
             break;
@@ -84,10 +116,6 @@ document.addEventListener("keypress",(event)=>{
         centerChanger.style.backgroundColor = "yellow";
    };
 });
-setInterval(() => {
-    const random = (Math.floor(Math.random() * 4) + 1);
-    create(random); 
-}, random_timer);
 function create(RANDOM){
     let c=0;
     const DO = document.getElementById("centerChanger");
@@ -139,7 +167,7 @@ function create(RANDOM){
                 clearInterval(fic);
             };
             if(D=="No"){
-                y=y+1;
+                y=(y+1);
                 scoreBoard2.innerText = y;
                 const vad = setTimeout(() => {
                     neww.remove();

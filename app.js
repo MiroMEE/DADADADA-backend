@@ -25,6 +25,9 @@ app.get("/",(req,res)=>{
         return res.render("",{layout:"./layouts/main",text:dataInput,__name:name});
     });
 });
+app.get("/lobby",(req,res)=>{
+    return res.render("lobby",{layout:"./layouts/main"});
+});
 app.get("/mera",(req,res)=>{
     return res.render("mera",{layout:"./layouts/main"});
 });

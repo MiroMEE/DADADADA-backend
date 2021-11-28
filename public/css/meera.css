@@ -29,7 +29,7 @@ body{
     background-color: gray;
     position: relative;
     float: left;
-    z-index: 1;
+    z-index: 2;
 }
 /*JS_-*/
 #playerOne{
@@ -73,4 +73,27 @@ body{
     border: white solid 4px;
     border-radius: 25%;
     z-index: 0;
+}
+
+#game{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#ready{
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    z-index: 100;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+#ready:hover{
+    cursor:pointer;
+    background-color: black;
+    border-radius: 20px;
 }
