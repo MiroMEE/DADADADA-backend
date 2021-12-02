@@ -9,18 +9,21 @@ const scoreBoard = document.getElementById("score");
 const scoreBoard2 = document.getElementById("score2");
 let widthOne,heightOne,width,height,BLOK_HEIGHT,BLOK_WIDTH,BLOK_TOP,speed_fluency,random_timer,x=0,y=0,dx,dy,distance;
 let setUpLeftPlayer_L,setUpLeftPlayer_R,setUpRightPlayer_L,setUpRightPlayer_R,setupCHANGER_;
-let CHANGE_NOW="LEFT";
+let CHANGE_NOW = "LEFT";let how_many_blocks;let CHANGE_NOW_;
+const windowsss = document.querySelector("#windowsss");
+const windowsssP = document.querySelector("#windowsssP");
 //set up
-width = 1900;
-height = 900;
+width = 1920;
+height = 700;
 setUpLeftPlayer_L = "d";
 setUpLeftPlayer_R = "f";
 setUpRightPlayer_L = "j";
 setUpRightPlayer_R = "k";
 setupCHANGER_ = " ";
-BLOK_TOP = 700;
 speed_fluency = 10;
-random_timer = 500;
+random_timer = 300;
+how_many_blocks = 100;
+CHANGE_NOW_ ="TWO";
 //process
 const L_L= -(width/2.5);
 const L_R= -(width/30);
@@ -31,7 +34,7 @@ BLOK_WIDTH = width/30;
 BLOK_HEIGHT = width/30;
 widthOne = width/2.5;
 heightOne = width/30;
-
+BLOK_TOP = height-200;
 playerLeft.style.left = L_L+"px";
 playerRight.style.right = R_L+"px";
 playerRight.style.left = R_L+"px";
@@ -62,48 +65,60 @@ playerRight.style.height = BLOK_HEIGHT+"px";
 const ready = document.getElementById("ready");
 ready.addEventListener("click",()=>{
     ready.remove();
-
-    setInterval(() => {
+    let how_many=0;
+    const dedede = setInterval(() => {
+        how_many = how_many+1;
+        console.log(how_many);
         const random = (Math.floor(Math.random() * 4) + 1);
-        create(random); 
+        create(random);
+        if(how_many==how_many_blocks){
+            const pepa = setInterval(() => {
+                console.log(x+" <--> "+y);
+                windowsss.style.display ="block";
+                windowsssP.innerText = x;
+                clearInterval(pepa);
+            }, (speed_fluency*random_timer));
+            clearInterval(dedede);
+        };
     }, random_timer);
-
 });
 document.addEventListener("keypress",(event)=>{
     switch(true) {
         case event.key==setUpLeftPlayer_L||event.key==setUpLeftPlayer_L.toUpperCase(): 
             playerLeft.style.left = L_L+"px";
-            if(CHANGE_NOW=="LEFT"){
+            if(CHANGE_NOW=="LEFT"||CHANGE_NOW_=="ONE"){
                 BLOK.style.left = L_L+"px";
             };
             break;
         case event.key==setUpLeftPlayer_R||event.key==setUpLeftPlayer_R.toUpperCase():
             playerLeft.style.left = L_R+"px";
-            if(CHANGE_NOW=="LEFT"){
+            if(CHANGE_NOW=="LEFT"||CHANGE_NOW_=="ONE"){
                 BLOK.style.left = L_R+"px";
             };
             break;
         case event.key==setUpRightPlayer_L||event.key==setUpRightPlayer_L.toUpperCase():
             playerRight.style.left = R_L+"px";
-            if(CHANGE_NOW=="RIGHT"){
+            if(CHANGE_NOW=="RIGHT"||CHANGE_NOW_=="ONE"){
                 BLOK.style.left = R_L+"px";
             };
             break;
         case event.key==setUpRightPlayer_R||event.key==setUpRightPlayer_R.toUpperCase():
             playerRight.style.left = R_R+"px";
-            if(CHANGE_NOW=="RIGHT"){
+            if(CHANGE_NOW=="RIGHT"||CHANGE_NOW_=="ONE"){
                 BLOK.style.left = R_R+"px";
             };
             break;
         case event.key==setupCHANGER_:
-            if(CHANGE_NOW=="LEFT"){
-                CHANGE_NOW = "RIGHT";
-                let gloked = playerRight.style.left.split("px")[0];
-                BLOK.style.left = gloked+"px";
-            } else if(CHANGE_NOW=="RIGHT"){
-                CHANGE_NOW = "LEFT";
-                let gloked = playerLeft.style.left.split("px")[0];
-                BLOK.style.left = gloked+"px";
+            if(!(CHANGE_NOW_=="ONE")){
+                if(CHANGE_NOW=="LEFT"){
+                    CHANGE_NOW = "RIGHT";
+                    let gloked = playerRight.style.left.split("px")[0];
+                    BLOK.style.left = gloked+"px";
+                } else if(CHANGE_NOW=="RIGHT"){
+                    CHANGE_NOW = "LEFT";
+                    let gloked = playerLeft.style.left.split("px")[0];
+                    BLOK.style.left = gloked+"px";
+                };
             };
             break;
         default:

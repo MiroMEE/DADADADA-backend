@@ -97,3 +97,13 @@ body{
     background-color: black;
     border-radius: 20px;
 }
+#windowsss{
+    display: none;
+    background-color: blue;
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}
