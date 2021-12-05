@@ -28,6 +28,9 @@ app.get("/lobby",(req,res)=>{
 app.get("/mera",(req,res)=>{
     return res.render("mera",{layout:"./layouts/main"});
 });
+app.get("/gameA",(req,res)=>{
+    return res.render("gameA",{layout:"./layouts/main"});
+});
 app.post('/submit',(req,res) =>{
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database("./info.db", sqlite3.OPEN_READWRITE, (err) => {

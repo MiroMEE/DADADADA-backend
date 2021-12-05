@@ -1,0 +1,109 @@
+#main{background-color: rgb(37, 37, 37);
+    margin: -8px;
+}
+#score{
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    position: fixed;
+    background-color: blueviolet;
+    width: 120px;
+    height: 40px;
+    text-align: center;
+}
+#score2{
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    margin-left: 120px;
+    position: fixed;
+    background-color: rgb(226, 43, 43);
+    width: 120px;
+    height: 40px;
+    border-bottom-right-radius: 5px;
+}
+body{
+    background-color: black;
+}
+#centerChanger{
+    background-color: gray;
+    position: relative;
+    float: left;
+    z-index: 2;
+}
+/*JS_-*/
+#playerOne{
+    background-color: wheat;
+    position: relative;
+    float: left;
+    z-index: 1;
+    bottom:0;
+}
+#playerTwo{
+    background-color: wheat;
+    position: relative;
+    float: right;
+    z-index: 1;
+    bottom:0;
+}
+#playerLeft{
+    position: absolute;
+    bottom:0;
+    z-index: 10;
+    float: left;
+    background-color: yellow;
+}
+#playerRight{
+    position: absolute;
+    bottom:0;
+    z-index: 10;
+    float: right;
+    background-color: hotpink;
+}
+#BLOK{
+    position: absolute;
+    background-color: white;
+    border: black solid 4px;
+    border-radius: 25%;
+    z-index: 3;
+}
+.AYAYA{
+    position: absolute;
+    background-color: black;
+    border: white solid 4px;
+    border-radius: 25%;
+    z-index: 0;
+}
+
+#game{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#ready{
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    z-index: 100;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+#ready:hover{
+    cursor:pointer;
+    background-color: black;
+    border-radius: 20px;
+}
+#windowsss{
+    display: none;
+    background-color: blue;
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}

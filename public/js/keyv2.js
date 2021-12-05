@@ -61,7 +61,22 @@ playerLeft.style.width = BLOK_HEIGHT+"px";
 playerLeft.style.height = BLOK_HEIGHT+"px";
 playerRight.style.width = BLOK_HEIGHT+"px";
 playerRight.style.height = BLOK_HEIGHT+"px";
+const ready = document.getElementById("ready");
+ready.remove();
+const G = []
+const delay = ms => new Promise(res => setTimeout(res, ms));
+const start = async () =>{
+    for(let i=0;i<G.length;i=i+2){
+        let first = G[i];
+        let second = G[i+1];
+        create(second);
+        console.log("uff");
+        await delay(first);
+    };
+};
+start();
 
+/*
 const ready = document.getElementById("ready");
 ready.addEventListener("click",()=>{
     ready.remove();
@@ -79,10 +94,10 @@ ready.addEventListener("click",()=>{
             clearInterval(dedede);
         };
     }, random_timer);
-});
+});*/
 document.addEventListener("keypress",(event)=>{
     switch(true) {
-        case event.key==setUpLeftPlayer_L||event.key==setUpLeftPlayer_L.toUpperCase(): 
+        case event.key==setUpLeftPlayer_L||event.key==setUpLeftPlayer_L.toUpperCase():
             playerLeft.style.left = L_L+"px";
             if(CHANGE_NOW=="LEFT"||CHANGE_NOW_=="ONE"){
                 BLOK.style.left = L_L+"px";
