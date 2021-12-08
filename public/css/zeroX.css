@@ -1,0 +1,18 @@
+.hxClass{
+    border: 1px solid black;
+    width: 16px;
+    height: 16px;
+    background-color: gray;
+    position: relative;
+    z-index: -100;
+}
+.blok{
+    background-color: red;
+    z-index: 100;
+    width: 18px;
+    height: 18px;
+    margin: -1px;
+}
+#hohoho{
+    opacity: 0;
+}

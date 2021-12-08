@@ -63,7 +63,7 @@ playerRight.style.width = BLOK_HEIGHT+"px";
 playerRight.style.height = BLOK_HEIGHT+"px";
 const ready = document.getElementById("ready");
 ready.remove();
-const G = []
+const G = [300,"2",300,"4",300,"3",300,"1",300,"2",300,"4",300,"3",300,"1",300,"2",300,"4",300,"3",300,"1",300,"2",300,"4",300,"3",300,"1",300,"2",300,"4",300,"3",300,"1",300,"2",300,"4",300,"3",300,"1",]
 const delay = ms => new Promise(res => setTimeout(res, ms));
 const start = async () =>{
     for(let i=0;i<G.length;i=i+2){
@@ -197,11 +197,12 @@ function create(RANDOM){
             if(D=="No"){
                 y=(y+1);
                 scoreBoard2.innerText = y;
-                const vad = setTimeout(() => {
-                    neww.remove();
-                    clearTimeout(vad);
-                    clearInterval(fic);
-                }, 130);
+                neww.remove();
+                if(y==1){
+                    const end = document.getElementById("game");
+                    end.remove();
+                }
+                clearInterval(fic);
             };
         };
     }, speed_fluency);
