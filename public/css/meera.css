@@ -61,6 +61,7 @@ body{
     background-color: hotpink;
 }
 #BLOK{
+    transition: left 0.1s;
     position: absolute;
     background-color: white;
     border: black solid 4px;
